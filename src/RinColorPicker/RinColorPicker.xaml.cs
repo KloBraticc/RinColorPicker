@@ -167,6 +167,23 @@ public partial class RinColorPicker : UserControl
 		EndDrag(true);
 	}
 
+	private static void ApplyRoundedClip(Border border)
+	{
+		double radius = border.CornerRadius.TopLeft;
+		Size size = border.RenderSize;
+		if (size.Width <= 0 || size.Height <= 0)
+			return;
+		RectangleGeometry clip = new(new Rect(size), radius, radius);
+		clip.Freeze();
+		border.Clip = clip;
+	}
+
+	private void RoundedClip_SizeChanged(object sender, SizeChangedEventArgs e)
+	{
+		if (sender is Border border)
+			ApplyRoundedClip(border);
+	}
+
 	private static double TrackFraction(FrameworkElement track, double x)
 	{
 		double width = track.ActualWidth;
@@ -729,12 +746,12 @@ public partial class RinColorPicker : UserControl
 			Margin = new Thickness(0, 0, 6, 6),
 			CornerRadius = new CornerRadius(5),
 			BorderThickness = new Thickness(1),
-			ClipToBounds = true,
 			Cursor = Cursors.Hand,
 			ToolTip = tooltip,
 			Tag = color,
 			Child = grid
 		};
+		swatch.SizeChanged += RoundedClip_SizeChanged;
 		swatch.SetResourceReference(Border.BorderBrushProperty, "DividerStrokeColorDefaultBrush");
 		swatch.MouseLeftButtonUp += Swatch_MouseLeftButtonUp;
 		if (removable)

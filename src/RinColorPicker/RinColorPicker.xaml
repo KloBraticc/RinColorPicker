@@ -61,7 +61,7 @@
         <ColumnDefinition Width="12" />
         <ColumnDefinition Width="44" />
       </Grid.ColumnDefinitions>
-      <Border x:Name="SpectrumHost" Grid.Column="0" CornerRadius="6" ClipToBounds="True" Cursor="Cross">
+      <Border x:Name="SpectrumHost" Grid.Column="0" CornerRadius="6" Cursor="Cross" SizeChanged="RoundedClip_SizeChanged">
         <Grid x:Name="SpectrumGrid" Background="Transparent" Focusable="True" FocusVisualStyle="{x:Null}" MouseDown="Spectrum_MouseDown" MouseMove="Spectrum_MouseMove" MouseUp="Spectrum_MouseUp" KeyDown="Spectrum_KeyDown">
           <Rectangle x:Name="SpectrumHue" />
           <Rectangle>
@@ -85,7 +85,7 @@
           </Canvas>
         </Grid>
       </Border>
-      <Border Grid.Column="2" CornerRadius="6" ClipToBounds="True" BorderThickness="1" BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}">
+      <Border Grid.Column="2" CornerRadius="6" BorderThickness="1" BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}" SizeChanged="RoundedClip_SizeChanged">
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="*" />
@@ -117,7 +117,7 @@
       </Canvas>
     </Grid>
     <Grid x:Name="AlphaRow" Height="18" Margin="0,18,0,0">
-      <Border Height="12" VerticalAlignment="Center" CornerRadius="6" ClipToBounds="True">
+      <Border Height="12" VerticalAlignment="Center" CornerRadius="6" SizeChanged="RoundedClip_SizeChanged">
         <Grid>
           <Rectangle Fill="{StaticResource RinCheckerboard}" />
           <Rectangle x:Name="AlphaGradientRect" />
