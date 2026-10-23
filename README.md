@@ -16,7 +16,7 @@
 
 <div align="center">
 
-[![License][shield-license]][link-license]
+[![License][shield-license-flat]][link-license]
 [![Stars][shield-repo-stars]][repo-stargazers]
 [![Last commit][shield-last-commit]][repo-commits]
 
@@ -180,6 +180,7 @@ The library builds with warnings treated as errors.
 RinColorPicker is released under the [MIT License](LICENSE). The Windows and macOS icons in this README are from [Voidstrap](https://github.com/KloBraticc/Voidstrap) and the Linux icon is from [Devicon](https://github.com/devicons/devicon) (MIT).
 
 [shield-license]:      https://img.shields.io/github/license/KloBraticc/RinColorPicker?style=for-the-badge
+[shield-license-flat]: https://img.shields.io/github/license/KloBraticc/RinColorPicker?color=4c1
 [shield-repo-stars]:   https://img.shields.io/github/stars/KloBraticc/RinColorPicker?color=ffd700
 [shield-last-commit]:  https://img.shields.io/github/last-commit/KloBraticc/RinColorPicker?color=8a2be2
 [shield-csharp]:       https://img.shields.io/badge/C%23-239120?style=for-the-badge
