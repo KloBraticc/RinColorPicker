@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'RinColorPicker.Cross' And '$(VoidstrapLinuxPackagingRoot)' == ''">
+    <BaseIntermediateOutputPath>$(MSBuildThisFileDirectory)RinColorPicker\obj-cross\$(RuntimeIdentifier)\</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(VoidstrapLinuxPackagingRoot)' != ''">
+    <BaseOutputPath>$(VoidstrapLinuxPackagingRoot)bin/$(MSBuildProjectName)/</BaseOutputPath>
+    <BaseIntermediateOutputPath>$(VoidstrapLinuxPackagingRoot)obj/$(MSBuildProjectName)/</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);bin/**;bin-*/**;bin-cross/**;obj/**;obj-*/**;obj-cross/**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>

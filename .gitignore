@@ -1,0 +1,7 @@
+[Bb]in/
+[Oo]bj/
+bin-cross/
+obj-*/
+*.user
+.vs/
+PublishOutputs.*.txt

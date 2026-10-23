@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <OutputType>Library</OutputType>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>RinColor</RootNamespace>
+    <AssemblyName>RinColorPicker</AssemblyName>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Version>1.0.0</Version>
+    <Authors>KloBratic</Authors>
+    <Description>A WPF colour picker with saturation and brightness square, hue and alpha sliders, RGB HSV HSL and hex input, swatches and an eyedropper.</Description>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/KloBraticc/RinColorPicker</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="obj-*\**;bin-cross\**" />
+    <Page Remove="obj-*\**;bin-cross\**" />
+    <None Remove="obj-*\**;bin-cross\**" />
+  </ItemGroup>
+
+</Project>

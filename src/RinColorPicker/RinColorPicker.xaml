@@ -1,0 +1,190 @@
+<UserControl x:Class="RinColor.RinColorPicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Width="340">
+  <UserControl.Resources>
+    <DrawingBrush x:Key="RinCheckerboard" TileMode="Tile" Viewport="0,0,8,8" ViewportUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <GeometryDrawing Brush="#FFFFFFFF">
+            <GeometryDrawing.Geometry>
+              <RectangleGeometry Rect="0,0,8,8" />
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+          <GeometryDrawing Brush="#40808080">
+            <GeometryDrawing.Geometry>
+              <GeometryGroup>
+                <RectangleGeometry Rect="0,0,4,4" />
+                <RectangleGeometry Rect="4,4,4,4" />
+              </GeometryGroup>
+            </GeometryDrawing.Geometry>
+          </GeometryDrawing>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <Style x:Key="RinHandle" TargetType="Ellipse">
+      <Setter Property="Width" Value="18" />
+      <Setter Property="Height" Value="18" />
+      <Setter Property="StrokeThickness" Value="4" />
+      <Setter Property="IsHitTestVisible" Value="False" />
+      <Setter Property="Fill" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+      <Setter Property="Stroke" Value="{DynamicResource ControlSolidFillColorDefaultBrush}" />
+    </Style>
+    <Style x:Key="RinIcon" TargetType="Path">
+      <Setter Property="Width" Value="16" />
+      <Setter Property="Height" Value="16" />
+      <Setter Property="Stretch" Value="Uniform" />
+      <Setter Property="StrokeThickness" Value="1.4" />
+      <Setter Property="StrokeLineJoin" Value="Round" />
+      <Setter Property="StrokeStartLineCap" Value="Round" />
+      <Setter Property="StrokeEndLineCap" Value="Round" />
+      <Setter Property="Stroke" Value="{DynamicResource TextFillColorPrimaryBrush}" />
+    </Style>
+    <Style x:Key="RinIconButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+      <Setter Property="Width" Value="34" />
+      <Setter Property="Height" Value="32" />
+      <Setter Property="Padding" Value="0" />
+      <Setter Property="Margin" Value="6,0,0,0" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="RinLabel" TargetType="TextBlock">
+      <Setter Property="FontSize" Value="12" />
+      <Setter Property="Margin" Value="2,0,0,4" />
+      <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+    </Style>
+  </UserControl.Resources>
+  <StackPanel>
+    <Grid Height="220">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="12" />
+        <ColumnDefinition Width="44" />
+      </Grid.ColumnDefinitions>
+      <Border x:Name="SpectrumHost" Grid.Column="0" CornerRadius="6" ClipToBounds="True" Cursor="Cross">
+        <Grid x:Name="SpectrumGrid" Background="Transparent" Focusable="True" FocusVisualStyle="{x:Null}" MouseDown="Spectrum_MouseDown" MouseMove="Spectrum_MouseMove" MouseUp="Spectrum_MouseUp" KeyDown="Spectrum_KeyDown">
+          <Rectangle x:Name="SpectrumHue" />
+          <Rectangle>
+            <Rectangle.Fill>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="#FFFFFFFF" Offset="0" />
+                <GradientStop Color="#00FFFFFF" Offset="1" />
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+          <Rectangle>
+            <Rectangle.Fill>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                <GradientStop Color="#00000000" Offset="0" />
+                <GradientStop Color="#FF000000" Offset="1" />
+              </LinearGradientBrush>
+            </Rectangle.Fill>
+          </Rectangle>
+          <Canvas>
+            <Ellipse x:Name="SpectrumThumb" Width="14" Height="14" StrokeThickness="2" Fill="Transparent" IsHitTestVisible="False" />
+          </Canvas>
+        </Grid>
+      </Border>
+      <Border Grid.Column="2" CornerRadius="6" ClipToBounds="True" BorderThickness="1" BorderBrush="{DynamicResource DividerStrokeColorDefaultBrush}">
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+          </Grid.RowDefinitions>
+          <Rectangle Grid.RowSpan="2" Fill="{StaticResource RinCheckerboard}" />
+          <Rectangle x:Name="PreviewRect" Grid.Row="0" />
+          <Rectangle x:Name="OriginalRect" Grid.Row="1" Cursor="Hand" MouseLeftButtonUp="Original_MouseLeftButtonUp" />
+        </Grid>
+      </Border>
+    </Grid>
+    <Grid Height="18" Margin="0,18,0,0">
+      <Border Height="12" VerticalAlignment="Center" CornerRadius="6">
+        <Border.Background>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#FFFF0000" Offset="0" />
+            <GradientStop Color="#FFFFFF00" Offset="0.167" />
+            <GradientStop Color="#FF00FF00" Offset="0.333" />
+            <GradientStop Color="#FF00FFFF" Offset="0.5" />
+            <GradientStop Color="#FF0000FF" Offset="0.667" />
+            <GradientStop Color="#FFFF00FF" Offset="0.833" />
+            <GradientStop Color="#FFFF0000" Offset="1" />
+          </LinearGradientBrush>
+        </Border.Background>
+      </Border>
+      <Border x:Name="HueTrack" Background="Transparent" Cursor="Hand" Focusable="True" FocusVisualStyle="{x:Null}" MouseDown="Hue_MouseDown" MouseMove="Hue_MouseMove" MouseUp="Hue_MouseUp" KeyDown="Hue_KeyDown" />
+      <Canvas IsHitTestVisible="False">
+        <Ellipse x:Name="HueHandle" Style="{StaticResource RinHandle}" />
+      </Canvas>
+    </Grid>
+    <Grid x:Name="AlphaRow" Height="18" Margin="0,18,0,0">
+      <Border Height="12" VerticalAlignment="Center" CornerRadius="6" ClipToBounds="True">
+        <Grid>
+          <Rectangle Fill="{StaticResource RinCheckerboard}" />
+          <Rectangle x:Name="AlphaGradientRect" />
+        </Grid>
+      </Border>
+      <Border x:Name="AlphaTrack" Background="Transparent" Cursor="Hand" Focusable="True" FocusVisualStyle="{x:Null}" MouseDown="Alpha_MouseDown" MouseMove="Alpha_MouseMove" MouseUp="Alpha_MouseUp" KeyDown="Alpha_KeyDown" />
+      <Canvas IsHitTestVisible="False">
+        <Ellipse x:Name="AlphaHandle" Style="{StaticResource RinHandle}" />
+      </Canvas>
+    </Grid>
+    <Grid Margin="0,18,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="96" />
+        <ColumnDefinition Width="8" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+      <ComboBox x:Name="ModeBox" Grid.Column="0" SelectedIndex="0" SelectionChanged="ModeBox_SelectionChanged">
+        <ComboBoxItem Content="RGB" />
+        <ComboBoxItem Content="HSV" />
+        <ComboBoxItem Content="HSL" />
+      </ComboBox>
+      <TextBox x:Name="HexBox" Grid.Column="2" MaxLength="9" VerticalContentAlignment="Center" TextChanged="HexBox_TextChanged" />
+      <StackPanel Grid.Column="3" Orientation="Horizontal">
+        <Button x:Name="EyedropperButton" Style="{StaticResource RinIconButton}" Click="Eyedropper_Click">
+          <Path Style="{StaticResource RinIcon}" Data="M12.5,1.5 L14.5,3.5 L12.5,5.5 L13.5,6.5 L12.5,7.5 L8.5,3.5 L9.5,2.5 L10.5,3.5 Z M9.5,5.5 L3.5,11.5 L2.5,14.5 L5.5,13.5 L11.5,7.5" />
+        </Button>
+        <Button x:Name="CopyButton" Style="{StaticResource RinIconButton}" Click="Copy_Click">
+          <Path Style="{StaticResource RinIcon}" Data="M5.5,1.5 H13.5 V11.5 H5.5 Z M2.5,4.5 V14.5 H10.5" />
+        </Button>
+        <Button x:Name="PasteButton" Style="{StaticResource RinIconButton}" Click="Paste_Click">
+          <Path Style="{StaticResource RinIcon}" Data="M4.5,2.5 H2.5 V14.5 H13.5 V2.5 H11.5 M5.5,1.5 H10.5 V3.5 H5.5 Z" />
+        </Button>
+      </StackPanel>
+    </Grid>
+    <Grid Margin="0,12,0,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="8" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="8" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition x:Name="AlphaInputGap" Width="8" />
+        <ColumnDefinition x:Name="AlphaInputColumn" Width="*" />
+      </Grid.ColumnDefinitions>
+      <StackPanel Grid.Column="0">
+        <TextBlock x:Name="C1Label" Style="{StaticResource RinLabel}" />
+        <TextBox x:Name="C1Box" MaxLength="3" TextChanged="Channel_TextChanged" PreviewKeyDown="Number_PreviewKeyDown" />
+      </StackPanel>
+      <StackPanel Grid.Column="2">
+        <TextBlock x:Name="C2Label" Style="{StaticResource RinLabel}" />
+        <TextBox x:Name="C2Box" MaxLength="3" TextChanged="Channel_TextChanged" PreviewKeyDown="Number_PreviewKeyDown" />
+      </StackPanel>
+      <StackPanel Grid.Column="4">
+        <TextBlock x:Name="C3Label" Style="{StaticResource RinLabel}" />
+        <TextBox x:Name="C3Box" MaxLength="3" TextChanged="Channel_TextChanged" PreviewKeyDown="Number_PreviewKeyDown" />
+      </StackPanel>
+      <StackPanel x:Name="AlphaInput" Grid.Column="6">
+        <TextBlock x:Name="AlphaLabel" Style="{StaticResource RinLabel}" />
+        <TextBox x:Name="AlphaBox" MaxLength="3" TextChanged="AlphaBox_TextChanged" PreviewKeyDown="Number_PreviewKeyDown" />
+      </StackPanel>
+    </Grid>
+    <StackPanel x:Name="SwatchSection" Margin="0,14,0,0">
+      <TextBlock x:Name="RecentLabel" Style="{StaticResource RinLabel}" />
+      <WrapPanel x:Name="RecentPanel" Margin="0,2,0,0" />
+      <TextBlock x:Name="SavedLabel" Style="{StaticResource RinLabel}" Margin="2,10,0,4" />
+      <WrapPanel x:Name="SavedPanel" Margin="0,2,0,0" />
+    </StackPanel>
+  </StackPanel>
+</UserControl>

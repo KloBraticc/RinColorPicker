@@ -1,0 +1,31 @@
+<Project Sdk="LibreWPF.Sdk">
+
+  <PropertyGroup>
+    <BaseOutputPath Condition="'$(VoidstrapLinuxPackagingRoot)' == ''">$(MSBuildThisFileDirectory)bin-cross\$(RuntimeIdentifier)\</BaseOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <OutputType>Library</OutputType>
+    <RootNamespace>RinColor</RootNamespace>
+    <AssemblyName>RinColorPicker</AssemblyName>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <ProGpuWpfUsePortableFrameworkReferences>true</ProGpuWpfUsePortableFrameworkReferences>
+    <ProGpuWpfSystemSecurityCryptographyXmlVersion>10.0.13</ProGpuWpfSystemSecurityCryptographyXmlVersion>
+    <ProGpuWpfUsePortableWinFormsCompat>false</ProGpuWpfUsePortableWinFormsCompat>
+    <ProGpuWpfUseLibreWinForms>false</ProGpuWpfUseLibreWinForms>
+    <PlatformTarget Condition="'$(RuntimeIdentifier)' == 'linux-arm64' Or '$(RuntimeIdentifier)' == 'osx-arm64'">ARM64</PlatformTarget>
+    <PlatformTarget Condition="'$(RuntimeIdentifier)' == 'linux-x64' Or '$(RuntimeIdentifier)' == 'osx-x64'">x64</PlatformTarget>
+    <EnableSourceLink>false</EnableSourceLink>
+    <DeterministicSourcePaths>false</DeterministicSourcePaths>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="obj-*\**;bin-cross\**;obj\**;bin\**" />
+    <Page Remove="obj-*\**;bin-cross\**;obj\**;bin\**" />
+    <None Remove="obj-*\**;bin-cross\**;obj\**;bin\**" />
+  </ItemGroup>
+
+</Project>
